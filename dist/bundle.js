@@ -112,7 +112,7 @@ define("qni/qni_decoder", ["require", "exports", "qni/apis/qni_codes"], function
             this.highlightColor = null;
             this.font = [null, 3, qni_codes_js_1.QniFontStyle.REGULAR];
             this.fontSizeCache = "3rem";
-            this.align = "left";
+            this.align = "line-left";
         }
         setFont(font) {
             this.font = font;
@@ -121,9 +121,9 @@ define("qni/qni_decoder", ["require", "exports", "qni/apis/qni_codes"], function
     }
     function qniTextAlignToHtml(align) {
         switch (align) {
-            case qni_codes_js_1.QniTextAlign.LEFT: return "left";
-            case qni_codes_js_1.QniTextAlign.CENTER: return "center";
-            case qni_codes_js_1.QniTextAlign.RIGHT: return "right";
+            case qni_codes_js_1.QniTextAlign.LEFT: return "line-left";
+            case qni_codes_js_1.QniTextAlign.CENTER: return "line-center";
+            case qni_codes_js_1.QniTextAlign.RIGHT: return "line-right";
         }
     }
     function qniColorToHtml(color) {
@@ -139,11 +139,13 @@ define("qni/qni_decoder", ["require", "exports", "qni/apis/qni_codes"], function
         InputRoot[InputRoot["Touch"] = 2] = "Touch";
     })(InputRoot || (InputRoot = {}));
     function start(url, qniConsole, input, inputBtn) {
+        const setting = new QniConsoleSetting();
         function makeNewLine() {
             const line = document.createElement("div");
             return qniConsole.appendChild(line);
         }
         let lastLine = makeNewLine();
+        lastLine.className = setting.align;
         let newLineFlag = true;
         function clearConsole() {
             if (qniConsole.lastChild !== null) {
@@ -152,7 +154,6 @@ define("qni/qni_decoder", ["require", "exports", "qni/apis/qni_codes"], function
             newline();
         }
         clearConsole();
-        const setting = new QniConsoleSetting();
         const ws = new WebSocket(url);
         ws.binaryType = "arraybuffer";
         let curInputReq = null;
@@ -415,6 +416,7 @@ define("qni/qni_decoder", ["require", "exports", "qni/apis/qni_codes"], function
                         }
                         case qni_codes_js_1.QniConsoleSettingItemType.SETTING_TEXT_ALIGN: {
                             setting.align = qniTextAlignToHtml(item[1]);
+                            lastLine.className = setting.align;
                             break;
                         }
                     }

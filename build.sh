@@ -1,8 +1,6 @@
-git submodule init upstream &&
-cd upstream/public &&
+git submodule update --init --recursive &&
+cd upstream &&
 npm run build &&
-cp -r assets ../.. &&
-cp -r dist ../.. &&
-cp -r index.html ../.. &&
-cp -r src ../..
+cp -r public .. &&
+cp -r ./src ..
 

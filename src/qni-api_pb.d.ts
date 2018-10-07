@@ -19,26 +19,6 @@ export namespace Empty {
   }
 }
 
-export class Timestamp extends jspb.Message {
-  getTime(): number;
-  setTime(value: number): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): Timestamp.AsObject;
-  static toObject(includeInstance: boolean, msg: Timestamp): Timestamp.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: Timestamp, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): Timestamp;
-  static deserializeBinaryFromReader(message: Timestamp, reader: jspb.BinaryReader): Timestamp;
-}
-
-export namespace Timestamp {
-  export type AsObject = {
-    time: number,
-  }
-}
-
 export class StringArray extends jspb.Message {
   clearDataList(): void;
   getDataList(): Array<string>;
@@ -86,13 +66,8 @@ export namespace ErrorResponse {
 }
 
 export class InputRequest extends jspb.Message {
-  getTag(): number;
-  setTag(value: number): void;
-
-  hasExpire(): boolean;
-  clearExpire(): void;
-  getExpire(): Timestamp | undefined;
-  setExpire(value?: Timestamp): void;
+  getExpire(): number;
+  setExpire(value: number): void;
 
   hasTouch(): boolean;
   clearTouch(): void;
@@ -182,8 +157,7 @@ export class InputRequest extends jspb.Message {
 
 export namespace InputRequest {
   export type AsObject = {
-    tag: number,
-    expire?: Timestamp.AsObject,
+    expire: number,
     touch?: Empty.AsObject,
     enter?: Empty.AsObject,
     anykey?: Empty.AsObject,
@@ -222,9 +196,6 @@ export namespace InputRequest {
 }
 
 export class InputResponse extends jspb.Message {
-  getTag(): number;
-  setTag(value: number): void;
-
   hasEmpty(): boolean;
   clearEmpty(): void;
   getEmpty(): Empty | undefined;
@@ -252,18 +223,18 @@ export class InputResponse extends jspb.Message {
 
   hasDate(): boolean;
   clearDate(): void;
-  getDate(): Timestamp | undefined;
-  setDate(value?: Timestamp): void;
+  getDate(): number;
+  setDate(value: number): void;
 
   hasDatetime(): boolean;
   clearDatetime(): void;
-  getDatetime(): Timestamp | undefined;
-  setDatetime(value?: Timestamp): void;
+  getDatetime(): number;
+  setDatetime(value: number): void;
 
   hasTime(): boolean;
   clearTime(): void;
-  getTime(): Timestamp | undefined;
-  setTime(value?: Timestamp): void;
+  getTime(): number;
+  setTime(value: number): void;
 
   hasColor(): boolean;
   clearColor(): void;
@@ -283,15 +254,14 @@ export class InputResponse extends jspb.Message {
 
 export namespace InputResponse {
   export type AsObject = {
-    tag: number,
     empty?: Empty.AsObject,
     pb_boolean: boolean,
     str: string,
     pb_int: number,
     pb_float: number,
-    date?: Timestamp.AsObject,
-    datetime?: Timestamp.AsObject,
-    time?: Timestamp.AsObject,
+    date: number,
+    datetime: number,
+    time: number,
     color: number,
   }
 
@@ -539,15 +509,13 @@ export namespace ConsoleRequest {
 }
 
 export class ConsoleResponse extends jspb.Message {
+  getTag(): number;
+  setTag(value: number): void;
+
   hasOkInput(): boolean;
   clearOkInput(): void;
   getOkInput(): InputResponse | undefined;
   setOkInput(value?: InputResponse): void;
-
-  hasOkAcceptInput(): boolean;
-  clearOkAcceptInput(): void;
-  getOkAcceptInput(): Empty | undefined;
-  setOkAcceptInput(value?: Empty): void;
 
   hasErr(): boolean;
   clearErr(): void;
@@ -567,15 +535,14 @@ export class ConsoleResponse extends jspb.Message {
 
 export namespace ConsoleResponse {
   export type AsObject = {
+    tag: number,
     okInput?: InputResponse.AsObject,
-    okAcceptInput?: Empty.AsObject,
     err?: ErrorResponse.AsObject,
   }
 
   export enum DataCase {
     DATA_NOT_SET = 0,
     OK_INPUT = 10,
-    OK_ACCEPT_INPUT = 11,
     ERR = 255,
   }
 }
@@ -673,15 +640,13 @@ export namespace ProgramCommandArray {
 }
 
 export class ProgramRequest extends jspb.Message {
+  getTag(): number;
+  setTag(value: number): void;
+
   hasInput(): boolean;
   clearInput(): void;
   getInput(): InputRequest | undefined;
   setInput(value?: InputRequest): void;
-
-  hasAcceptInput(): boolean;
-  clearAcceptInput(): void;
-  getAcceptInput(): number;
-  setAcceptInput(value: number): void;
 
   getDataCase(): ProgramRequest.DataCase;
   serializeBinary(): Uint8Array;
@@ -696,14 +661,13 @@ export class ProgramRequest extends jspb.Message {
 
 export namespace ProgramRequest {
   export type AsObject = {
+    tag: number,
     input?: InputRequest.AsObject,
-    acceptInput: number,
   }
 
   export enum DataCase {
     DATA_NOT_SET = 0,
     INPUT = 10,
-    ACCEPT_INPUT = 11,
   }
 }
 
@@ -767,6 +731,11 @@ export class ProgramMessage extends jspb.Message {
   getRes(): ProgramResponse | undefined;
   setRes(value?: ProgramResponse): void;
 
+  hasAcceptRes(): boolean;
+  clearAcceptRes(): void;
+  getAcceptRes(): number;
+  setAcceptRes(value: number): void;
+
   getDataCase(): ProgramMessage.DataCase;
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ProgramMessage.AsObject;
@@ -782,12 +751,14 @@ export namespace ProgramMessage {
   export type AsObject = {
     req?: ProgramRequest.AsObject,
     res?: ProgramResponse.AsObject,
+    acceptRes: number,
   }
 
   export enum DataCase {
     DATA_NOT_SET = 0,
     REQ = 10,
     RES = 11,
+    ACCEPT_RES = 12,
   }
 }
 

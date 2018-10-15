@@ -2,22 +2,9 @@
 // file: qni-api.proto
 
 import * as jspb from "google-protobuf";
-
-export class Empty extends jspb.Message {
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): Empty.AsObject;
-  static toObject(includeInstance: boolean, msg: Empty): Empty.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: Empty, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): Empty;
-  static deserializeBinaryFromReader(message: Empty, reader: jspb.BinaryReader): Empty;
-}
-
-export namespace Empty {
-  export type AsObject = {
-  }
-}
+import * as google_protobuf_duration_pb from "google-protobuf/google/protobuf/duration_pb";
+import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
+import * as google_protobuf_empty_pb from "google-protobuf/google/protobuf/empty_pb";
 
 export class StringArray extends jspb.Message {
   clearDataList(): void;
@@ -42,8 +29,8 @@ export namespace StringArray {
 }
 
 export class ErrorResponse extends jspb.Message {
-  getReqType(): number;
-  setReqType(value: number): void;
+  getReqType(): string;
+  setReqType(value: string): void;
 
   getReason(): string;
   setReason(value: string): void;
@@ -60,39 +47,41 @@ export class ErrorResponse extends jspb.Message {
 
 export namespace ErrorResponse {
   export type AsObject = {
-    reqType: number,
+    reqType: string,
     reason: string,
   }
 }
 
 export class InputRequest extends jspb.Message {
-  getExpire(): number;
-  setExpire(value: number): void;
+  hasExpire(): boolean;
+  clearExpire(): void;
+  getExpire(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setExpire(value?: google_protobuf_timestamp_pb.Timestamp): void;
 
   hasTouch(): boolean;
   clearTouch(): void;
-  getTouch(): Empty | undefined;
-  setTouch(value?: Empty): void;
+  getTouch(): google_protobuf_empty_pb.Empty | undefined;
+  setTouch(value?: google_protobuf_empty_pb.Empty): void;
 
   hasEnter(): boolean;
   clearEnter(): void;
-  getEnter(): Empty | undefined;
-  setEnter(value?: Empty): void;
+  getEnter(): google_protobuf_empty_pb.Empty | undefined;
+  setEnter(value?: google_protobuf_empty_pb.Empty): void;
 
   hasAnykey(): boolean;
   clearAnykey(): void;
-  getAnykey(): Empty | undefined;
-  setAnykey(value?: Empty): void;
+  getAnykey(): google_protobuf_empty_pb.Empty | undefined;
+  setAnykey(value?: google_protobuf_empty_pb.Empty): void;
 
   hasBoolean(): boolean;
   clearBoolean(): void;
-  getBoolean(): Empty | undefined;
-  setBoolean(value?: Empty): void;
+  getBoolean(): google_protobuf_empty_pb.Empty | undefined;
+  setBoolean(value?: google_protobuf_empty_pb.Empty): void;
 
   hasStr(): boolean;
   clearStr(): void;
-  getStr(): Empty | undefined;
-  setStr(value?: Empty): void;
+  getStr(): google_protobuf_empty_pb.Empty | undefined;
+  setStr(value?: google_protobuf_empty_pb.Empty): void;
 
   hasStrMaxLen(): boolean;
   clearStrMaxLen(): void;
@@ -106,8 +95,8 @@ export class InputRequest extends jspb.Message {
 
   hasInt(): boolean;
   clearInt(): void;
-  getInt(): Empty | undefined;
-  setInt(value?: Empty): void;
+  getInt(): google_protobuf_empty_pb.Empty | undefined;
+  setInt(value?: google_protobuf_empty_pb.Empty): void;
 
   hasIntMaxLen(): boolean;
   clearIntMaxLen(): void;
@@ -116,8 +105,8 @@ export class InputRequest extends jspb.Message {
 
   hasFloat(): boolean;
   clearFloat(): void;
-  getFloat(): Empty | undefined;
-  setFloat(value?: Empty): void;
+  getFloat(): google_protobuf_empty_pb.Empty | undefined;
+  setFloat(value?: google_protobuf_empty_pb.Empty): void;
 
   hasFloatMaxLen(): boolean;
   clearFloatMaxLen(): void;
@@ -126,23 +115,23 @@ export class InputRequest extends jspb.Message {
 
   hasDate(): boolean;
   clearDate(): void;
-  getDate(): Empty | undefined;
-  setDate(value?: Empty): void;
+  getDate(): google_protobuf_empty_pb.Empty | undefined;
+  setDate(value?: google_protobuf_empty_pb.Empty): void;
 
   hasDatetime(): boolean;
   clearDatetime(): void;
-  getDatetime(): Empty | undefined;
-  setDatetime(value?: Empty): void;
+  getDatetime(): google_protobuf_empty_pb.Empty | undefined;
+  setDatetime(value?: google_protobuf_empty_pb.Empty): void;
 
   hasTime(): boolean;
   clearTime(): void;
-  getTime(): Empty | undefined;
-  setTime(value?: Empty): void;
+  getTime(): google_protobuf_empty_pb.Empty | undefined;
+  setTime(value?: google_protobuf_empty_pb.Empty): void;
 
   hasColor(): boolean;
   clearColor(): void;
-  getColor(): Empty | undefined;
-  setColor(value?: Empty): void;
+  getColor(): google_protobuf_empty_pb.Empty | undefined;
+  setColor(value?: google_protobuf_empty_pb.Empty): void;
 
   getDataCase(): InputRequest.DataCase;
   serializeBinary(): Uint8Array;
@@ -157,22 +146,22 @@ export class InputRequest extends jspb.Message {
 
 export namespace InputRequest {
   export type AsObject = {
-    expire: number,
-    touch?: Empty.AsObject,
-    enter?: Empty.AsObject,
-    anykey?: Empty.AsObject,
-    pb_boolean?: Empty.AsObject,
-    str?: Empty.AsObject,
+    expire?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+    touch?: google_protobuf_empty_pb.Empty.AsObject,
+    enter?: google_protobuf_empty_pb.Empty.AsObject,
+    anykey?: google_protobuf_empty_pb.Empty.AsObject,
+    pb_boolean?: google_protobuf_empty_pb.Empty.AsObject,
+    str?: google_protobuf_empty_pb.Empty.AsObject,
     strMaxLen: number,
     strSelect?: StringArray.AsObject,
-    pb_int?: Empty.AsObject,
+    pb_int?: google_protobuf_empty_pb.Empty.AsObject,
     intMaxLen: number,
-    pb_float?: Empty.AsObject,
+    pb_float?: google_protobuf_empty_pb.Empty.AsObject,
     floatMaxLen: number,
-    date?: Empty.AsObject,
-    datetime?: Empty.AsObject,
-    time?: Empty.AsObject,
-    color?: Empty.AsObject,
+    date?: google_protobuf_empty_pb.Empty.AsObject,
+    datetime?: google_protobuf_empty_pb.Empty.AsObject,
+    time?: google_protobuf_empty_pb.Empty.AsObject,
+    color?: google_protobuf_empty_pb.Empty.AsObject,
   }
 
   export enum DataCase {
@@ -198,8 +187,8 @@ export namespace InputRequest {
 export class InputResponse extends jspb.Message {
   hasEmpty(): boolean;
   clearEmpty(): void;
-  getEmpty(): Empty | undefined;
-  setEmpty(value?: Empty): void;
+  getEmpty(): google_protobuf_empty_pb.Empty | undefined;
+  setEmpty(value?: google_protobuf_empty_pb.Empty): void;
 
   hasBoolean(): boolean;
   clearBoolean(): void;
@@ -223,18 +212,18 @@ export class InputResponse extends jspb.Message {
 
   hasDate(): boolean;
   clearDate(): void;
-  getDate(): number;
-  setDate(value: number): void;
+  getDate(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setDate(value?: google_protobuf_timestamp_pb.Timestamp): void;
 
   hasDatetime(): boolean;
   clearDatetime(): void;
-  getDatetime(): number;
-  setDatetime(value: number): void;
+  getDatetime(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setDatetime(value?: google_protobuf_timestamp_pb.Timestamp): void;
 
   hasTime(): boolean;
   clearTime(): void;
-  getTime(): number;
-  setTime(value: number): void;
+  getTime(): google_protobuf_duration_pb.Duration | undefined;
+  setTime(value?: google_protobuf_duration_pb.Duration): void;
 
   hasColor(): boolean;
   clearColor(): void;
@@ -254,14 +243,14 @@ export class InputResponse extends jspb.Message {
 
 export namespace InputResponse {
   export type AsObject = {
-    empty?: Empty.AsObject,
+    empty?: google_protobuf_empty_pb.Empty.AsObject,
     pb_boolean: boolean,
     str: string,
     pb_int: number,
     pb_float: number,
-    date: number,
-    datetime: number,
-    time: number,
+    date?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+    datetime?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+    time?: google_protobuf_duration_pb.Duration.AsObject,
     color: number,
   }
 
@@ -323,8 +312,8 @@ export class ConsolePrintData extends jspb.Message {
 
   hasNewLine(): boolean;
   clearNewLine(): void;
-  getNewLine(): Empty | undefined;
-  setNewLine(value?: Empty): void;
+  getNewLine(): google_protobuf_empty_pb.Empty | undefined;
+  setNewLine(value?: google_protobuf_empty_pb.Empty): void;
 
   hasDeleteLine(): boolean;
   clearDeleteLine(): void;
@@ -333,8 +322,8 @@ export class ConsolePrintData extends jspb.Message {
 
   hasClearLine(): boolean;
   clearClearLine(): void;
-  getClearLine(): Empty | undefined;
-  setClearLine(value?: Empty): void;
+  getClearLine(): google_protobuf_empty_pb.Empty | undefined;
+  setClearLine(value?: google_protobuf_empty_pb.Empty): void;
 
   getDataCase(): ConsolePrintData.DataCase;
   serializeBinary(): Uint8Array;
@@ -352,9 +341,9 @@ export namespace ConsolePrintData {
     print: string,
     printLine: string,
     printButton?: ConsolePrintButtonData.AsObject,
-    newLine?: Empty.AsObject,
+    newLine?: google_protobuf_empty_pb.Empty.AsObject,
     deleteLine: number,
-    clearLine?: Empty.AsObject,
+    clearLine?: google_protobuf_empty_pb.Empty.AsObject,
   }
 
   export enum DataCase {
@@ -674,8 +663,8 @@ export namespace ProgramRequest {
 export class ProgramResponse extends jspb.Message {
   hasOkLoadState(): boolean;
   clearOkLoadState(): void;
-  getOkLoadState(): Empty | undefined;
-  setOkLoadState(value?: Empty): void;
+  getOkLoadState(): google_protobuf_empty_pb.Empty | undefined;
+  setOkLoadState(value?: google_protobuf_empty_pb.Empty): void;
 
   hasOkShareState(): boolean;
   clearOkShareState(): void;
@@ -705,7 +694,7 @@ export class ProgramResponse extends jspb.Message {
 
 export namespace ProgramResponse {
   export type AsObject = {
-    okLoadState?: Empty.AsObject,
+    okLoadState?: google_protobuf_empty_pb.Empty.AsObject,
     okShareState: string,
     okGetState?: ProgramCommandArray.AsObject,
     err?: ErrorResponse.AsObject,

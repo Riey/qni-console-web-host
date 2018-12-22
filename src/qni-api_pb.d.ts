@@ -315,6 +315,11 @@ export class ConsolePrintData extends jspb.Message {
   getNewLine(): google_protobuf_empty_pb.Empty | undefined;
   setNewLine(value?: google_protobuf_empty_pb.Empty): void;
 
+  hasDrawLine(): boolean;
+  clearDrawLine(): void;
+  getDrawLine(): google_protobuf_empty_pb.Empty | undefined;
+  setDrawLine(value?: google_protobuf_empty_pb.Empty): void;
+
   hasDeleteLine(): boolean;
   clearDeleteLine(): void;
   getDeleteLine(): number;
@@ -342,6 +347,7 @@ export namespace ConsolePrintData {
     printLine: string,
     printButton?: ConsolePrintButtonData.AsObject,
     newLine?: google_protobuf_empty_pb.Empty.AsObject,
+    drawLine?: google_protobuf_empty_pb.Empty.AsObject,
     deleteLine: number,
     clearLine?: google_protobuf_empty_pb.Empty.AsObject,
   }
@@ -352,6 +358,7 @@ export namespace ConsolePrintData {
     PRINT_LINE = 11,
     PRINT_BUTTON = 12,
     NEW_LINE = 20,
+    DRAW_LINE = 21,
     DELETE_LINE = 30,
     CLEAR_LINE = 31,
   }
@@ -442,26 +449,6 @@ export namespace ConsoleSettingItem {
 }
 
 export class ConsoleRequest extends jspb.Message {
-  hasLoadState(): boolean;
-  clearLoadState(): void;
-  getLoadState(): string;
-  setLoadState(value: string): void;
-
-  hasShareState(): boolean;
-  clearShareState(): void;
-  getShareState(): string;
-  setShareState(value: string): void;
-
-  hasShareStateOverwrite(): boolean;
-  clearShareStateOverwrite(): void;
-  getShareStateOverwrite(): string;
-  setShareStateOverwrite(value: string): void;
-
-  hasDeleteState(): boolean;
-  clearDeleteState(): void;
-  getDeleteState(): string;
-  setDeleteState(value: string): void;
-
   hasGetState(): boolean;
   clearGetState(): void;
   getGetState(): number;
@@ -480,19 +467,11 @@ export class ConsoleRequest extends jspb.Message {
 
 export namespace ConsoleRequest {
   export type AsObject = {
-    loadState: string,
-    shareState: string,
-    shareStateOverwrite: string,
-    deleteState: string,
     getState: number,
   }
 
   export enum DataCase {
     DATA_NOT_SET = 0,
-    LOAD_STATE = 10,
-    SHARE_STATE = 11,
-    SHARE_STATE_OVERWRITE = 12,
-    DELETE_STATE = 13,
     GET_STATE = 20,
   }
 }
@@ -661,16 +640,6 @@ export namespace ProgramRequest {
 }
 
 export class ProgramResponse extends jspb.Message {
-  hasOkLoadState(): boolean;
-  clearOkLoadState(): void;
-  getOkLoadState(): google_protobuf_empty_pb.Empty | undefined;
-  setOkLoadState(value?: google_protobuf_empty_pb.Empty): void;
-
-  hasOkShareState(): boolean;
-  clearOkShareState(): void;
-  getOkShareState(): string;
-  setOkShareState(value: string): void;
-
   hasOkGetState(): boolean;
   clearOkGetState(): void;
   getOkGetState(): ProgramCommandArray | undefined;
@@ -694,16 +663,12 @@ export class ProgramResponse extends jspb.Message {
 
 export namespace ProgramResponse {
   export type AsObject = {
-    okLoadState?: google_protobuf_empty_pb.Empty.AsObject,
-    okShareState: string,
     okGetState?: ProgramCommandArray.AsObject,
     err?: ErrorResponse.AsObject,
   }
 
   export enum DataCase {
     DATA_NOT_SET = 0,
-    OK_LOAD_STATE = 10,
-    OK_SHARE_STATE = 11,
     OK_GET_STATE = 12,
     ERR = 255,
   }
@@ -755,7 +720,6 @@ export enum FontStyle {
   REGULAR = 0,
   ITALIC = 1,
   BOLD = 2,
-  UNDERLINE = 4,
 }
 
 export enum TextAlign {

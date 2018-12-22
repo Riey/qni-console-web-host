@@ -1956,7 +1956,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<!Array<number>>}
  * @const
  */
-proto.qni.api.ConsolePrintData.oneofGroups_ = [[10,11,12,20,30,31]];
+proto.qni.api.ConsolePrintData.oneofGroups_ = [[10,11,12,20,21,30,31]];
 
 /**
  * @enum {number}
@@ -1967,6 +1967,7 @@ proto.qni.api.ConsolePrintData.DataCase = {
   PRINT_LINE: 11,
   PRINT_BUTTON: 12,
   NEW_LINE: 20,
+  DRAW_LINE: 21,
   DELETE_LINE: 30,
   CLEAR_LINE: 31
 };
@@ -2011,6 +2012,7 @@ proto.qni.api.ConsolePrintData.toObject = function(includeInstance, msg) {
     printLine: jspb.Message.getFieldWithDefault(msg, 11, ""),
     printButton: (f = msg.getPrintButton()) && proto.qni.api.ConsolePrintButtonData.toObject(includeInstance, f),
     newLine: (f = msg.getNewLine()) && google_protobuf_empty_pb.Empty.toObject(includeInstance, f),
+    drawLine: (f = msg.getDrawLine()) && google_protobuf_empty_pb.Empty.toObject(includeInstance, f),
     deleteLine: jspb.Message.getFieldWithDefault(msg, 30, 0),
     clearLine: (f = msg.getClearLine()) && google_protobuf_empty_pb.Empty.toObject(includeInstance, f)
   };
@@ -2066,6 +2068,11 @@ proto.qni.api.ConsolePrintData.deserializeBinaryFromReader = function(msg, reade
       var value = new google_protobuf_empty_pb.Empty;
       reader.readMessage(value,google_protobuf_empty_pb.Empty.deserializeBinaryFromReader);
       msg.setNewLine(value);
+      break;
+    case 21:
+      var value = new google_protobuf_empty_pb.Empty;
+      reader.readMessage(value,google_protobuf_empty_pb.Empty.deserializeBinaryFromReader);
+      msg.setDrawLine(value);
       break;
     case 30:
       var value = /** @type {number} */ (reader.readUint32());
@@ -2131,6 +2138,14 @@ proto.qni.api.ConsolePrintData.serializeBinaryToWriter = function(message, write
   if (f != null) {
     writer.writeMessage(
       20,
+      f,
+      google_protobuf_empty_pb.Empty.serializeBinaryToWriter
+    );
+  }
+  f = message.getDrawLine();
+  if (f != null) {
+    writer.writeMessage(
+      21,
       f,
       google_protobuf_empty_pb.Empty.serializeBinaryToWriter
     );
@@ -2268,6 +2283,36 @@ proto.qni.api.ConsolePrintData.prototype.clearNewLine = function() {
  */
 proto.qni.api.ConsolePrintData.prototype.hasNewLine = function() {
   return jspb.Message.getField(this, 20) != null;
+};
+
+
+/**
+ * optional google.protobuf.Empty DRAW_LINE = 21;
+ * @return {?proto.google.protobuf.Empty}
+ */
+proto.qni.api.ConsolePrintData.prototype.getDrawLine = function() {
+  return /** @type{?proto.google.protobuf.Empty} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_empty_pb.Empty, 21));
+};
+
+
+/** @param {?proto.google.protobuf.Empty|undefined} value */
+proto.qni.api.ConsolePrintData.prototype.setDrawLine = function(value) {
+  jspb.Message.setOneofWrapperField(this, 21, proto.qni.api.ConsolePrintData.oneofGroups_[0], value);
+};
+
+
+proto.qni.api.ConsolePrintData.prototype.clearDrawLine = function() {
+  this.setDrawLine(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.qni.api.ConsolePrintData.prototype.hasDrawLine = function() {
+  return jspb.Message.getField(this, 21) != null;
 };
 
 
@@ -2904,17 +2949,13 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<!Array<number>>}
  * @const
  */
-proto.qni.api.ConsoleRequest.oneofGroups_ = [[10,11,12,13,20]];
+proto.qni.api.ConsoleRequest.oneofGroups_ = [[20]];
 
 /**
  * @enum {number}
  */
 proto.qni.api.ConsoleRequest.DataCase = {
   DATA_NOT_SET: 0,
-  LOAD_STATE: 10,
-  SHARE_STATE: 11,
-  SHARE_STATE_OVERWRITE: 12,
-  DELETE_STATE: 13,
   GET_STATE: 20
 };
 
@@ -2954,10 +2995,6 @@ proto.qni.api.ConsoleRequest.prototype.toObject = function(opt_includeInstance) 
  */
 proto.qni.api.ConsoleRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    loadState: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    shareState: jspb.Message.getFieldWithDefault(msg, 11, ""),
-    shareStateOverwrite: jspb.Message.getFieldWithDefault(msg, 12, ""),
-    deleteState: jspb.Message.getFieldWithDefault(msg, 13, ""),
     getState: jspb.Message.getFieldWithDefault(msg, 20, 0)
   };
 
@@ -2995,22 +3032,6 @@ proto.qni.api.ConsoleRequest.deserializeBinaryFromReader = function(msg, reader)
     }
     var field = reader.getFieldNumber();
     switch (field) {
-    case 10:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setLoadState(value);
-      break;
-    case 11:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setShareState(value);
-      break;
-    case 12:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setShareStateOverwrite(value);
-      break;
-    case 13:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setDeleteState(value);
-      break;
     case 20:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setGetState(value);
@@ -3044,34 +3065,6 @@ proto.qni.api.ConsoleRequest.prototype.serializeBinary = function() {
  */
 proto.qni.api.ConsoleRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = /** @type {string} */ (jspb.Message.getField(message, 10));
-  if (f != null) {
-    writer.writeString(
-      10,
-      f
-    );
-  }
-  f = /** @type {string} */ (jspb.Message.getField(message, 11));
-  if (f != null) {
-    writer.writeString(
-      11,
-      f
-    );
-  }
-  f = /** @type {string} */ (jspb.Message.getField(message, 12));
-  if (f != null) {
-    writer.writeString(
-      12,
-      f
-    );
-  }
-  f = /** @type {string} */ (jspb.Message.getField(message, 13));
-  if (f != null) {
-    writer.writeString(
-      13,
-      f
-    );
-  }
   f = /** @type {number} */ (jspb.Message.getField(message, 20));
   if (f != null) {
     writer.writeUint64(
@@ -3079,122 +3072,6 @@ proto.qni.api.ConsoleRequest.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
-};
-
-
-/**
- * optional string LOAD_STATE = 10;
- * @return {string}
- */
-proto.qni.api.ConsoleRequest.prototype.getLoadState = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
-};
-
-
-/** @param {string} value */
-proto.qni.api.ConsoleRequest.prototype.setLoadState = function(value) {
-  jspb.Message.setOneofField(this, 10, proto.qni.api.ConsoleRequest.oneofGroups_[0], value);
-};
-
-
-proto.qni.api.ConsoleRequest.prototype.clearLoadState = function() {
-  jspb.Message.setOneofField(this, 10, proto.qni.api.ConsoleRequest.oneofGroups_[0], undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {!boolean}
- */
-proto.qni.api.ConsoleRequest.prototype.hasLoadState = function() {
-  return jspb.Message.getField(this, 10) != null;
-};
-
-
-/**
- * optional string SHARE_STATE = 11;
- * @return {string}
- */
-proto.qni.api.ConsoleRequest.prototype.getShareState = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
-};
-
-
-/** @param {string} value */
-proto.qni.api.ConsoleRequest.prototype.setShareState = function(value) {
-  jspb.Message.setOneofField(this, 11, proto.qni.api.ConsoleRequest.oneofGroups_[0], value);
-};
-
-
-proto.qni.api.ConsoleRequest.prototype.clearShareState = function() {
-  jspb.Message.setOneofField(this, 11, proto.qni.api.ConsoleRequest.oneofGroups_[0], undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {!boolean}
- */
-proto.qni.api.ConsoleRequest.prototype.hasShareState = function() {
-  return jspb.Message.getField(this, 11) != null;
-};
-
-
-/**
- * optional string SHARE_STATE_OVERWRITE = 12;
- * @return {string}
- */
-proto.qni.api.ConsoleRequest.prototype.getShareStateOverwrite = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 12, ""));
-};
-
-
-/** @param {string} value */
-proto.qni.api.ConsoleRequest.prototype.setShareStateOverwrite = function(value) {
-  jspb.Message.setOneofField(this, 12, proto.qni.api.ConsoleRequest.oneofGroups_[0], value);
-};
-
-
-proto.qni.api.ConsoleRequest.prototype.clearShareStateOverwrite = function() {
-  jspb.Message.setOneofField(this, 12, proto.qni.api.ConsoleRequest.oneofGroups_[0], undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {!boolean}
- */
-proto.qni.api.ConsoleRequest.prototype.hasShareStateOverwrite = function() {
-  return jspb.Message.getField(this, 12) != null;
-};
-
-
-/**
- * optional string DELETE_STATE = 13;
- * @return {string}
- */
-proto.qni.api.ConsoleRequest.prototype.getDeleteState = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 13, ""));
-};
-
-
-/** @param {string} value */
-proto.qni.api.ConsoleRequest.prototype.setDeleteState = function(value) {
-  jspb.Message.setOneofField(this, 13, proto.qni.api.ConsoleRequest.oneofGroups_[0], value);
-};
-
-
-proto.qni.api.ConsoleRequest.prototype.clearDeleteState = function() {
-  jspb.Message.setOneofField(this, 13, proto.qni.api.ConsoleRequest.oneofGroups_[0], undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {!boolean}
- */
-proto.qni.api.ConsoleRequest.prototype.hasDeleteState = function() {
-  return jspb.Message.getField(this, 13) != null;
 };
 
 
@@ -4346,15 +4223,13 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<!Array<number>>}
  * @const
  */
-proto.qni.api.ProgramResponse.oneofGroups_ = [[10,11,12,255]];
+proto.qni.api.ProgramResponse.oneofGroups_ = [[12,255]];
 
 /**
  * @enum {number}
  */
 proto.qni.api.ProgramResponse.DataCase = {
   DATA_NOT_SET: 0,
-  OK_LOAD_STATE: 10,
-  OK_SHARE_STATE: 11,
   OK_GET_STATE: 12,
   ERR: 255
 };
@@ -4395,8 +4270,6 @@ proto.qni.api.ProgramResponse.prototype.toObject = function(opt_includeInstance)
  */
 proto.qni.api.ProgramResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    okLoadState: (f = msg.getOkLoadState()) && google_protobuf_empty_pb.Empty.toObject(includeInstance, f),
-    okShareState: jspb.Message.getFieldWithDefault(msg, 11, ""),
     okGetState: (f = msg.getOkGetState()) && proto.qni.api.ProgramCommandArray.toObject(includeInstance, f),
     err: (f = msg.getErr()) && proto.qni.api.ErrorResponse.toObject(includeInstance, f)
   };
@@ -4435,15 +4308,6 @@ proto.qni.api.ProgramResponse.deserializeBinaryFromReader = function(msg, reader
     }
     var field = reader.getFieldNumber();
     switch (field) {
-    case 10:
-      var value = new google_protobuf_empty_pb.Empty;
-      reader.readMessage(value,google_protobuf_empty_pb.Empty.deserializeBinaryFromReader);
-      msg.setOkLoadState(value);
-      break;
-    case 11:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setOkShareState(value);
-      break;
     case 12:
       var value = new proto.qni.api.ProgramCommandArray;
       reader.readMessage(value,proto.qni.api.ProgramCommandArray.deserializeBinaryFromReader);
@@ -4483,21 +4347,6 @@ proto.qni.api.ProgramResponse.prototype.serializeBinary = function() {
  */
 proto.qni.api.ProgramResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getOkLoadState();
-  if (f != null) {
-    writer.writeMessage(
-      10,
-      f,
-      google_protobuf_empty_pb.Empty.serializeBinaryToWriter
-    );
-  }
-  f = /** @type {string} */ (jspb.Message.getField(message, 11));
-  if (f != null) {
-    writer.writeString(
-      11,
-      f
-    );
-  }
   f = message.getOkGetState();
   if (f != null) {
     writer.writeMessage(
@@ -4514,65 +4363,6 @@ proto.qni.api.ProgramResponse.serializeBinaryToWriter = function(message, writer
       proto.qni.api.ErrorResponse.serializeBinaryToWriter
     );
   }
-};
-
-
-/**
- * optional google.protobuf.Empty OK_LOAD_STATE = 10;
- * @return {?proto.google.protobuf.Empty}
- */
-proto.qni.api.ProgramResponse.prototype.getOkLoadState = function() {
-  return /** @type{?proto.google.protobuf.Empty} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_empty_pb.Empty, 10));
-};
-
-
-/** @param {?proto.google.protobuf.Empty|undefined} value */
-proto.qni.api.ProgramResponse.prototype.setOkLoadState = function(value) {
-  jspb.Message.setOneofWrapperField(this, 10, proto.qni.api.ProgramResponse.oneofGroups_[0], value);
-};
-
-
-proto.qni.api.ProgramResponse.prototype.clearOkLoadState = function() {
-  this.setOkLoadState(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {!boolean}
- */
-proto.qni.api.ProgramResponse.prototype.hasOkLoadState = function() {
-  return jspb.Message.getField(this, 10) != null;
-};
-
-
-/**
- * optional string OK_SHARE_STATE = 11;
- * @return {string}
- */
-proto.qni.api.ProgramResponse.prototype.getOkShareState = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
-};
-
-
-/** @param {string} value */
-proto.qni.api.ProgramResponse.prototype.setOkShareState = function(value) {
-  jspb.Message.setOneofField(this, 11, proto.qni.api.ProgramResponse.oneofGroups_[0], value);
-};
-
-
-proto.qni.api.ProgramResponse.prototype.clearOkShareState = function() {
-  jspb.Message.setOneofField(this, 11, proto.qni.api.ProgramResponse.oneofGroups_[0], undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {!boolean}
- */
-proto.qni.api.ProgramResponse.prototype.hasOkShareState = function() {
-  return jspb.Message.getField(this, 11) != null;
 };
 
 
@@ -4913,8 +4703,7 @@ proto.qni.api.ProgramMessage.prototype.hasAcceptRes = function() {
 proto.qni.api.FontStyle = {
   REGULAR: 0,
   ITALIC: 1,
-  BOLD: 2,
-  UNDERLINE: 4
+  BOLD: 2
 };
 
 /**
